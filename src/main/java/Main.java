@@ -29,8 +29,15 @@ public class Main {
                     System.out.println("Usage: hash-object -w <file>");
                 }
             }
-          
-
+            case "ls-tree" -> {
+                if (args.length >= 3 && args[1].equals("--name-only")) {
+                    String treeSha = args[2];
+                    ReadTree.lsTree(treeSha);
+                } else {
+                    System.out.println("Usage: ls-tree --name-only <tree_sha>");
+                }
+            }
+           
             default -> System.out.println("Unknown command: " + command);
         }
     }
