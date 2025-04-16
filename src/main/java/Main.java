@@ -21,7 +21,16 @@ public class Main {
                     System.out.println("Usage: cat-file -p <hash>");
                 }
             }
+            case "hash-object" -> {
+                if (args.length >= 3 && args[1].equals("-w")) {
+                    String filePath = args[2];
+                    CreateBlob.hashAndWrite(filePath);
+                } else {
+                    System.out.println("Usage: hash-object -w <file>");
+                }
+            }
           
+
             default -> System.out.println("Unknown command: " + command);
         }
     }
