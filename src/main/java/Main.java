@@ -58,7 +58,20 @@ public class Main {
                 String commitSha = CreateCommit.createCommitObject(treeSha, parentSha, message);
                 System.out.println(commitSha);
             }
-         
+            case "clone" -> {
+                if (args.length >= 3) {
+                    String repoUrl = args[1];
+                    String destinationDir = args[2]; // Pass as String directly
+                    try {
+                        CloneRepo.cloneRepository(repoUrl, destinationDir); // Pass String to method
+                    } catch (Exception e) {  // Catch generic Exception if IOException is not thrown
+                        System.err.println("Error cloning repository: " + e.getMessage());
+                        e.printStackTrace(); // Optional: for full debug info
+                    }
+                } else {
+                    System.out.println("Usage: clone <repository_url> <destination_dir>");
+                }
+            }
 
             default -> System.out.println("Unknown command: " + command);
         }
