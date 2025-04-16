@@ -38,7 +38,27 @@ public class Main {
                 }
             }
             case "write-tree" -> WriteTree.execute();
-          
+            case "commit-tree" -> {
+                String treeSha = args[1];
+                String parentSha = null;
+                String message = null;
+
+                for (int i = 2; i < args.length; i++) {
+                    switch (args[i]) {
+                        case "-p" -> parentSha = args[++i];
+                        case "-m" -> message = args[++i];
+                    }
+                }
+
+                if (message == null) {
+                    System.err.println("Error: Commit message is required using -m");
+                    return;
+                }
+
+                String commitSha = CreateCommit.createCommitObject(treeSha, parentSha, message);
+                System.out.println(commitSha);
+            }
+         
 
             default -> System.out.println("Unknown command: " + command);
         }
