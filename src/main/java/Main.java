@@ -13,8 +13,15 @@ public class Main {
 
         switch (command) {
             case "init" -> GitInit.run();
-           
-
+            case "cat-file" -> {
+                if (args.length >= 3 && args[1].equals("-p")) {
+                    String hash = args[2];
+                    ReadBlob.printBlob(hash);
+                } else {
+                    System.out.println("Usage: cat-file -p <hash>");
+                }
+            }
+          
             default -> System.out.println("Unknown command: " + command);
         }
     }
