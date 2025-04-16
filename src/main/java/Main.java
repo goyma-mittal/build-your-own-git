@@ -37,7 +37,9 @@ public class Main {
                     System.out.println("Usage: ls-tree --name-only <tree_sha>");
                 }
             }
-           
+            case "write-tree" -> WriteTree.execute();
+          
+
             default -> System.out.println("Unknown command: " + command);
         }
     }
